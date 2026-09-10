@@ -1,5 +1,14 @@
 package com.smartmess.smart_mess_management.repository;
 
-public interface MenuRepository {
+
+import com.smartmess.smart_mess_management.entity.Menu;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.time.LocalDate;
+import java.util.List;
+
+public interface MenuRepository extends JpaRepository<Menu, Long> {
+
+    List<Menu> findByMenuDate(LocalDate menuDate);
 
 }
