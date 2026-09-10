@@ -8,17 +8,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-
 @Entity
 @Table(name = "food_order_items")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class FoodOrderItem {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -30,8 +24,6 @@ public class FoodOrderItem {
     private FoodItem foodItem;
 
     private Integer quantity;
-
     private BigDecimal unitPrice;
-
     private BigDecimal subTotal;
 }

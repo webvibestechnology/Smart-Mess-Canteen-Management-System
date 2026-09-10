@@ -8,20 +8,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
+import enums.OrderStatus;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-
 @Entity
 @Table(name = "food_orders")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class FoodOrder {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -32,8 +28,8 @@ public class FoodOrder {
     @JoinColumn(name = "canteen_id")
     private Canteen canteen;
 
-  //  @Enumerated(EnumType.STRING)
-   // private OrderStatus status;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status; // PENDING, CONFIRMED, READY, DELIVERED, CANCELLED
 
     private BigDecimal totalAmount;
 

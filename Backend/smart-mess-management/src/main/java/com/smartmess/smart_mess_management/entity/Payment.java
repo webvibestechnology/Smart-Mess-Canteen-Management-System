@@ -8,19 +8,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
+import enums.PaymentStatus;
+import enums.PaymentType;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "payments")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class Payment {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -29,15 +27,14 @@ public class Payment {
 
     private BigDecimal amount;
 
-    //@Enumerated(EnumType.STRING)
-   // private PaymentType type;
+    @Enumerated(EnumType.STRING)
+    private PaymentType type; // MESS_FEE, CANTEEN_ORDER, SUBSCRIPTION
 
-   // @Enumerated(EnumType.STRING)
-  //  private PaymentStatus status;
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus status; // PENDING, COMPLETED, FAILED, REFUNDED
 
     private String transactionId;
-
-    private String paymentMethod;
+    private String paymentMethod; // CASH, UPI, CARD, ONLINE
 
     @CreationTimestamp
     private LocalDateTime paidAt;

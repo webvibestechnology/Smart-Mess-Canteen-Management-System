@@ -1,6 +1,8 @@
 package com.smartmess.smart_mess_management.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,16 +19,12 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+import enums.FoodCategory;
 @Entity
 @Table(name = "food_items")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class FoodItem {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
@@ -37,10 +35,10 @@ public class FoodItem {
     @NotNull
     private BigDecimal price;
 
-    private String category; // VEG, NON_VEG, BEVERAGE, SNACK
-    
-    private Boolean isAvailable = true;
+    @Enumerated(EnumType.STRING)
+    private FoodCategory category; // VEG, NON_VEG, BEVERAGE, SNACK
 
+    private Boolean isAvailable = true;
     private String imageUrl;
 
     @ManyToOne
