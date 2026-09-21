@@ -13,4 +13,5 @@ public interface FoodItemRepository extends JpaRepository<FoodItem, Long> {
 
     List<FoodItem> findByIsAvailable(Boolean isAvailable);
 
+    List<FoodItem> findByCanteenIdAndIsAvailableTrue(Long canteenId);
 }

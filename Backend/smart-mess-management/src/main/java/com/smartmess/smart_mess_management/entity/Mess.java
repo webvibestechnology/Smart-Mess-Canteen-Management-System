@@ -11,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import enums.MessType;
 
 import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "messes")
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
@@ -35,4 +36,71 @@ public class Mess {
 
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+
+    // Getters and Setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public MessType getType() {
+        return type;
+    }
+
+    public void setType(MessType type) {
+        this.type = type;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }

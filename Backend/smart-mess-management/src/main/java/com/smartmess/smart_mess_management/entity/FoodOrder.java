@@ -13,6 +13,7 @@ import enums.OrderStatus;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+
 @Entity
 @Table(name = "food_orders")
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
@@ -38,4 +39,63 @@ public class FoodOrder {
 
     @OneToMany(mappedBy = "foodOrder", cascade = CascadeType.ALL)
     private List<FoodOrderItem> orderItems;
+
+
+    // Getters and Setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Canteen getCanteen() {
+        return canteen;
+    }
+
+    public void setCanteen(Canteen canteen) {
+        this.canteen = canteen;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public LocalDateTime getOrderedAt() {
+        return orderedAt;
+    }
+
+    public void setOrderedAt(LocalDateTime orderedAt) {
+        this.orderedAt = orderedAt;
+    }
+
+    public List<FoodOrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<FoodOrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
 }

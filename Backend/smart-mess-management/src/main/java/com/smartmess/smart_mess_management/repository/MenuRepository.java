@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface MenuRepository extends JpaRepository<Menu, Long> {
-
-    List<Menu> findByMenuDate(LocalDate menuDate);
+	List<Menu> findByMessIdAndMenuDate(Long messId, LocalDate date);
 
 }
