@@ -1,1 +1,57 @@
-<p>student-add works!</p>
+<div class="container">
+
+  <h2>Add Student</h2>
+
+  <form [formGroup]="studentForm" (ngSubmit)="submitForm()">
+
+    <div>
+      <label>Name</label>
+      <input type="text" formControlName="name">
+    </div>
+
+    <div>
+      <label>Email</label>
+      <input type="email" formControlName="email">
+    </div>
+
+    <div>
+      <label>Password</label>
+      <input type="password" formControlName="password">
+    </div>
+
+    <div>
+      <label>Phone</label>
+      <input type="text" formControlName="phone">
+    </div>
+
+    <div>
+      <label>Roll Number</label>
+      <input type="text" formControlName="rollNumber">
+    </div>
+
+    <div>
+      <label>Department</label>
+      <input type="text" formControlName="department">
+    </div>
+
+    <div>
+      <label>Hostel Name</label>
+      <input type="text" formControlName="hostelName">
+    </div>
+
+    <div>
+      <label>Room Number</label>
+      <input type="text" formControlName="roomNumber">
+    </div>
+
+    <br>
+
+    <button type="submit">Save Student</button>
+
+    <button type="button" (click)="cancel()">
+      Cancel
+    </button>
+
+  </form>
+
+</div>

@@ -1,1 +1,56 @@
-<p>student-list works!</p>
+<div class="container mt-4">
+
+  <div class="d-flex justify-content-between mb-3">
+    <h2>Students</h2>
+
+    <a routerLink="/students/add" class="btn btn-primary">
+      + Add Student
+    </a>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Roll No</th>
+        <th>Department</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let s of students">
+        <td>{{ s.id }}</td>
+        <td>{{ s.name }}</td>
+        <td>{{ s.email }}</td>
+        <td>{{ s.rollNumber }}</td>
+        <td>{{ s.department }}</td>
+        <td>{{ s.status }}</td>
+
+        <td>
+          <button
+            class="btn btn-sm btn-warning"
+            (click)="editStudent(s.id!)">
+            Edit
+          </button>
+
+          <button
+            class="btn btn-sm btn-danger"
+            (click)="deleteStudent(s.id!)">
+            Delete
+          </button>
+        </td>
+      </tr>
+
+      <tr *ngIf="students.length === 0">
+        <td colspan="7" class="text-center">
+          No students found.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
