@@ -1,1 +1,62 @@
-<p>menu-list works!</p>
+<div class="container mt-4">
+
+  <div class="d-flex justify-content-between mb-3">
+    <h2>Menu List</h2>
+
+    <a routerLink="/menus/add" class="btn btn-primary">
+      + Add Menu
+    </a>
+  </div>
+
+  <table class="table table-striped">
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Menu Date</th>
+        <th>Day</th>
+        <th>Mess</th>
+        <th>Meal</th>
+        <th>Items</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let m of menus">
+
+        <td>{{ m.id }}</td>
+        <td>{{ m.menuDate }}</td>
+        <td>{{ m.dayOfWeek }}</td>
+        <td>{{ m.mess }}</td>
+        <td>{{ m.meal }}</td>
+        <td>{{ m.items }}</td>
+
+        <td>
+          <button
+            class="btn btn-sm btn-warning me-1"
+            (click)="editMenu(m.id!)">
+            Edit
+          </button>
+
+          <button
+            class="btn btn-sm btn-danger"
+            (click)="deleteMenu(m.id!)">
+            Delete
+          </button>
+        </td>
+
+      </tr>
+
+      <tr *ngIf="menus.length === 0">
+        <td colspan="7" class="text-center">
+          No menus found.
+        </td>
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>

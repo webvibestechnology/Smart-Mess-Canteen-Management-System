@@ -1,1 +1,93 @@
-<p>menu-edit works!</p>
+<div class="container mt-4">
+
+  <h2>Edit Menu</h2>
+
+  <form [formGroup]="menuForm" (ngSubmit)="updateMenu()">
+
+    <div class="mb-3">
+      <label>Menu Date</label>
+
+      <input
+        type="date"
+        class="form-control"
+        formControlName="menuDate"
+        (change)="setDayOfWeek()">
+    </div>
+
+    <div class="mb-3">
+      <label>Day of Week</label>
+
+      <input
+        type="text"
+        class="form-control"
+        formControlName="dayOfWeek"
+        readonly>
+    </div>
+
+    <div class="mb-3">
+      <label>Mess</label>
+
+      <select
+        class="form-control"
+        formControlName="mess">
+
+        <option [ngValue]="null">
+          Select Mess
+        </option>
+
+        <option
+          *ngFor="let mess of messes"
+          [ngValue]="mess">
+          {{ mess.name }}
+        </option>
+
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label>Meal</label>
+
+      <select
+        class="form-control"
+        formControlName="meal">
+
+        <option [ngValue]="null">
+          Select Meal
+        </option>
+
+        <option
+          *ngFor="let meal of meals"
+          [ngValue]="meal">
+          {{ meal.name }}
+        </option>
+
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label>Items</label>
+
+      <textarea
+        class="form-control"
+        rows="4"
+        formControlName="items"
+        placeholder="Enter menu items">
+      </textarea>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary me-2">
+      Update Menu
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="cancel()">
+      Cancel
+    </button>
+
+  </form>
+
+</div>

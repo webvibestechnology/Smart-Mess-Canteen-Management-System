@@ -1,1 +1,68 @@
-<p>mess-edit works!</p>
+<div class="container mt-4">
+
+  <h2>Edit Mess</h2>
+
+  <form [formGroup]="messForm" (ngSubmit)="updateMess()">
+
+    <div class="mb-3">
+      <label>Name</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="name">
+    </div>
+
+    <div class="mb-3">
+      <label>Location</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="location">
+    </div>
+
+    <div class="mb-3">
+      <label>Contact Number</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="contactNumber">
+    </div>
+
+    <div class="mb-3">
+      <label>Capacity</label>
+      <input
+        type="number"
+        class="form-control"
+        formControlName="capacity">
+    </div>
+
+    <div class="mb-3">
+      <label>Type</label>
+
+      <select
+        class="form-control"
+        formControlName="type">
+
+        <option value="VEG">VEG</option>
+        <option value="NON_VEG">NON_VEG</option>
+        <option value="BOTH">BOTH</option>
+
+      </select>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary me-2">
+      Update Mess
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="cancel()">
+      Cancel
+    </button>
+
+  </form>
+
+</div>

@@ -1,1 +1,138 @@
-<p>notice-add works!</p>
+<div class="container mt-4">
+
+  <h2>Add Notice</h2>
+
+  <form
+    [formGroup]="noticeForm"
+    (ngSubmit)="addNotice()">
+
+    <!-- Title -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Title
+      </label>
+
+      <input
+        type="text"
+        class="form-control"
+        formControlName="title"
+        placeholder="Enter notice title">
+
+      <small
+        class="text-danger"
+        *ngIf="
+          noticeForm.get('title')?.touched &&
+          noticeForm.get('title')?.invalid
+        ">
+
+        Title is required.
+
+      </small>
+
+    </div>
+
+
+    <!-- Content -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Content
+      </label>
+
+      <textarea
+        class="form-control"
+        rows="4"
+        formControlName="content"
+        placeholder="Enter notice content">
+      </textarea>
+
+    </div>
+
+
+    <!-- Type -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Notice Type
+      </label>
+
+      <select
+        class="form-select"
+        formControlName="type">
+
+        <option
+          *ngFor="let type of types"
+          [ngValue]="type">
+
+          {{ type }}
+
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- Valid Until -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Valid Until
+      </label>
+
+      <input
+        type="date"
+        class="form-control"
+        formControlName="validUntil">
+
+    </div>
+
+
+    <!-- Active -->
+
+    <div class="form-check mb-3">
+
+      <input
+        type="checkbox"
+        class="form-check-input"
+        id="isActive"
+        formControlName="isActive">
+
+      <label
+        class="form-check-label"
+        for="isActive">
+
+        Active Notice
+
+      </label>
+
+    </div>
+
+
+    <!-- Buttons -->
+
+    <button
+      type="submit"
+      class="btn btn-primary me-2">
+
+      Add Notice
+
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="cancel()">
+
+      Cancel
+
+    </button>
+
+  </form>
+
+</div>

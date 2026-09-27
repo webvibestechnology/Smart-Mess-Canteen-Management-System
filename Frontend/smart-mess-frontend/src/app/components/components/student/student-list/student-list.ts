@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
-import { Student } from '../../../../models/models/student.model';
 import { StudentService } from '../../../../services/services/student';
 
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './student-list.html',
   styleUrl: './student-list.css'
 })
 export class StudentList implements OnInit {
 
-  students: Student[] = [];
+  students: any[] = [];
 
   constructor(
     private studentService: StudentService,
@@ -22,30 +21,73 @@ export class StudentList implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadStudents();
-  }
 
-  loadStudents(): void {
+    console.log('STUDENT LIST COMPONENT LOADED');
+
     this.studentService.getAll().subscribe({
-      next: (data: Student[]) => {
+
+      next: (data: any[]) => {
+
+        console.log('STUDENTS FROM API:', data);
+
         this.students = data;
+
       },
-      error: (error: any) => {
-        console.error('Error loading students:', error);
+
+      error: (error) => {
+
+        console.error('STUDENT API ERROR:', error);
+
       }
+
     });
+
   }
 
-  deleteStudent(id: number): void {
-    if (confirm('Are you sure you want to delete this student?')) {
-      this.studentService.delete(id).subscribe({
-        next: () => this.loadStudents(),
-        error: (error: any) => console.error(error)
-      });
-    }
+  addStudent(): void {
+    this.router.navigate(['/students/add']);
   }
 
   editStudent(id: number): void {
     this.router.navigate(['/students/edit', id]);
   }
+
+  deleteStudent(id: number): void {
+
+    if (!confirm('Are you sure you want to delete this student?')) {
+      return;
+    }
+
+    this.studentService.delete(id).subscribe({
+
+      next: () => {
+
+        alert('Student deleted successfully');
+
+        this.studentService.getAll().subscribe({
+
+          next: (data: any[]) => {
+            this.students = data;
+          },
+
+          error: (error) => {
+            console.error(error);
+          }
+
+        });
+
+      },
+
+      error: (error) => {
+
+        console.error('DELETE ERROR:', error);
+
+        alert('Failed to delete student');
+
+      }
+
+    });
+
+  }
+
 }

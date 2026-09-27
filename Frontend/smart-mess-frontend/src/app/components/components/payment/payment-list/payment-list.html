@@ -1,1 +1,143 @@
-<p>payment-list works!</p>
+<div class="container mt-4">
+
+  <div class="d-flex justify-content-between mb-3">
+
+    <h2>Payments</h2>
+
+  </div>
+
+  <!-- Filters -->
+
+  <div class="row mb-3">
+
+    <!-- Student Filter -->
+
+    <div class="col-md-4">
+
+      <label class="form-label">
+        Filter by Student
+      </label>
+
+      <select
+        class="form-select"
+        [(ngModel)]="selectedStudent"
+        (change)="filterPayments()">
+
+        <option value="ALL">
+          All Students
+        </option>
+
+        <option
+          *ngFor="let student of students"
+          [value]="student.id">
+
+          {{ student.name }}
+
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- Status Filter -->
+
+    <div class="col-md-4">
+
+      <label class="form-label">
+        Filter by Status
+      </label>
+
+      <select
+        class="form-select"
+        [(ngModel)]="selectedStatus"
+        (change)="filterPayments()">
+
+        <option value="ALL">
+          All Status
+        </option>
+
+        <option
+          *ngFor="let status of statuses"
+          [value]="status">
+
+          {{ status }}
+
+        </option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+
+  <!-- Payment Table -->
+
+  <table class="table table-striped">
+
+    <thead>
+
+      <tr>
+
+        <th>Student</th>
+        <th>Amount</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Transaction ID</th>
+        <th>Date</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr
+        *ngFor="let payment of filteredPayments">
+
+        <td>
+          {{ payment.student?.name || 'N/A' }}
+        </td>
+
+        <td>
+          ₹{{ payment.amount }}
+        </td>
+
+        <td>
+          {{ payment.type }}
+        </td>
+
+        <td>
+          {{ payment.status }}
+        </td>
+
+        <td>
+          {{ payment.transactionId || 'N/A' }}
+        </td>
+
+        <td>
+          {{ payment.paidAt || 'N/A' }}
+        </td>
+
+      </tr>
+
+
+      <tr
+        *ngIf="filteredPayments.length === 0">
+
+        <td
+          colspan="6"
+          class="text-center">
+
+          No payments found.
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>

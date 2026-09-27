@@ -13,7 +13,10 @@ import { StudentService } from '../../../../services/services/student';
 @Component({
   selector: 'app-student-add',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './student-add.html',
   styleUrl: './student-add.css'
 })
@@ -26,16 +29,36 @@ export class StudentAdd {
     private studentService: StudentService,
     private router: Router
   ) {
+
     this.studentForm = this.fb.group({
+
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email
+        ]
+      ],
+
+      password: [
+        '',
+        Validators.required
+      ],
+
       phone: [''],
+
       rollNumber: [''],
+
       department: [''],
+
       hostelName: [''],
+
       roomNumber: ['']
+
     });
+
   }
 
   submitForm(): void {
@@ -45,19 +68,71 @@ export class StudentAdd {
       return;
     }
 
-    this.studentService.create(this.studentForm.value).subscribe({
-      next: () => {
-        alert('Student added successfully!');
-        this.router.navigate(['/students']);
+    const studentData = {
+
+      ...this.studentForm.value,
+
+      status: 'ACTIVE'
+
+    };
+
+    console.log(
+      'ADDING STUDENT:',
+      studentData
+    );
+
+    this.studentService.create(studentData).subscribe({
+
+      next: (response) => {
+
+        console.log(
+          'STUDENT ADDED:',
+          response
+        );
+
+        alert(
+          'Student added successfully!'
+        );
+
+        this.router.navigate([
+          '/students'
+        ]);
+
       },
+
       error: (error: any) => {
-        console.error('Error adding student:', error);
-        alert('Failed to add student.');
+
+        console.error(
+          'ADD STUDENT ERROR:',
+          error
+        );
+
+        console.error(
+          'STATUS:',
+          error.status
+        );
+
+        console.error(
+          'ERROR BODY:',
+          error.error
+        );
+
+        alert(
+          'Student could not be added.'
+        );
+
       }
+
     });
+
   }
 
   cancel(): void {
-    this.router.navigate(['/students']);
+
+    this.router.navigate([
+      '/students'
+    ]);
+
   }
+
 }

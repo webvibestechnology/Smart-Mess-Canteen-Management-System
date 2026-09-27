@@ -1,1 +1,123 @@
-<p>complaint-add works!</p>
+<div class="container mt-4">
+
+  <h2>Add Complaint</h2>
+
+  <form
+    [formGroup]="complaintForm"
+    (ngSubmit)="addComplaint()">
+
+    <!-- Student -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Student
+      </label>
+
+      <select
+        class="form-select"
+        formControlName="student">
+
+        <option [ngValue]="null">
+          -- Select Student --
+        </option>
+
+        <option
+          *ngFor="let student of students"
+          [ngValue]="student.id">
+
+          {{ student.name }}
+
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- Title -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Title
+      </label>
+
+      <input
+        type="text"
+        class="form-control"
+        formControlName="title"
+        placeholder="Enter complaint title">
+
+    </div>
+
+
+    <!-- Description -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Description
+      </label>
+
+      <textarea
+        class="form-control"
+        rows="4"
+        formControlName="description"
+        placeholder="Enter complaint description">
+      </textarea>
+
+    </div>
+
+
+    <!-- Category -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Category
+      </label>
+
+      <select
+        class="form-select"
+        formControlName="category">
+
+        <option [ngValue]="null">
+          -- Select Category --
+        </option>
+
+        <option
+          *ngFor="let category of categories"
+          [ngValue]="category">
+
+          {{ category }}
+
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- Buttons -->
+
+    <button
+      type="submit"
+      class="btn btn-primary me-2">
+
+      Add Complaint
+
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="cancel()">
+
+      Cancel
+
+    </button>
+
+  </form>
+
+</div>

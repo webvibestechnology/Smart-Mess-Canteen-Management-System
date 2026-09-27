@@ -1,1 +1,106 @@
-<p>food-item-edit works!</p>
+<div class="container mt-4">
+
+  <h2>Edit Food Item</h2>
+
+  <form
+    [formGroup]="foodItemForm"
+    (ngSubmit)="updateFoodItem()">
+
+    <div class="mb-3">
+      <label>Name</label>
+
+      <input
+        type="text"
+        class="form-control"
+        formControlName="name">
+    </div>
+
+    <div class="mb-3">
+      <label>Description</label>
+
+      <textarea
+        class="form-control"
+        rows="3"
+        formControlName="description">
+      </textarea>
+    </div>
+
+    <div class="mb-3">
+      <label>Price</label>
+
+      <input
+        type="number"
+        class="form-control"
+        formControlName="price"
+        min="0">
+    </div>
+
+    <div class="mb-3">
+      <label>Category</label>
+
+      <select
+        class="form-control"
+        formControlName="category">
+
+        <option value="">
+          Select Category
+        </option>
+
+        <option value="VEG">VEG</option>
+        <option value="NON_VEG">NON_VEG</option>
+        <option value="BEVERAGE">BEVERAGE</option>
+        <option value="SNACK">SNACK</option>
+
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label>Canteen</label>
+
+      <select
+        class="form-control"
+        formControlName="canteen">
+
+        <option [ngValue]="null">
+          Select Canteen
+        </option>
+
+        <option
+          *ngFor="let canteen of canteens"
+          [ngValue]="canteen">
+
+          {{ canteen.name }}
+
+        </option>
+
+      </select>
+    </div>
+
+    <div class="mb-3">
+
+      <label>
+        <input
+          type="checkbox"
+          formControlName="isAvailable">
+
+        Available
+      </label>
+
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary me-2">
+      Update Food Item
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="cancel()">
+      Cancel
+    </button>
+
+  </form>
+
+</div>

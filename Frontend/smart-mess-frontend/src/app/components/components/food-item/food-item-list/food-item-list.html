@@ -1,1 +1,72 @@
-<p>food-item-list works!</p>
+<div class="container mt-4">
+
+  <div class="d-flex justify-content-between mb-3">
+
+    <h2>Food Item List</h2>
+
+    <a
+      routerLink="/food-items/add"
+      class="btn btn-primary">
+      + Add Food Item
+    </a>
+
+  </div>
+
+  <table class="table table-striped">
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Available</th>
+        <th>Canteen</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let item of foodItems">
+
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.category }}</td>
+        <td>{{ item.isAvailable }}</td>
+        <td>{{ item.canteen }}</td>
+
+        <td>
+
+          <button
+            class="btn btn-sm btn-warning me-1"
+            (click)="editFoodItem(item.id!)">
+            Edit
+          </button>
+
+          <button
+            class="btn btn-sm btn-danger"
+            (click)="deleteFoodItem(item.id!)">
+            Delete
+          </button>
+
+        </td>
+
+      </tr>
+
+      <tr *ngIf="foodItems.length === 0">
+
+        <td colspan="8" class="text-center">
+          No food items found.
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>

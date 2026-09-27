@@ -1,1 +1,233 @@
-<p>attendance-list works!</p>
+<div class="attendance-page">
+
+  <!-- Header -->
+  <div class="attendance-header">
+
+    <div>
+      <h2>Attendance</h2>
+      <p>View and manage student attendance records</p>
+    </div>
+
+    <a
+      routerLink="/attendance/add"
+      class="add-attendance-btn">
+      + Mark Attendance
+    </a>
+
+  </div>
+
+
+  <!-- Filter Card -->
+  <div class="filter-card">
+
+    <div class="filter-item">
+
+      <label>From Date</label>
+
+      <input
+        type="date"
+        [(ngModel)]="fromDate">
+
+    </div>
+
+
+    <div class="filter-item">
+
+      <label>To Date</label>
+
+      <input
+        type="date"
+        [(ngModel)]="toDate">
+
+    </div>
+
+
+    <div class="filter-buttons">
+
+      <button
+        type="button"
+        class="filter-btn"
+        (click)="filterByDateRange()">
+
+        Filter
+
+      </button>
+
+
+      <button
+        type="button"
+        class="clear-btn"
+        (click)="clearFilter()">
+
+        Clear
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- Attendance Table -->
+  <div class="table-card">
+
+    <div class="table-header">
+
+      <h3>Attendance Records</h3>
+
+      <span class="record-count">
+        {{ filteredRecords.length }} Records
+      </span>
+
+    </div>
+
+
+    <!-- Loading -->
+    <div
+      class="empty-message"
+      *ngIf="attendanceRecords.length === 0">
+
+      <div class="empty-icon">📋</div>
+
+      <h3>No Attendance Records</h3>
+
+      <p>
+        No attendance has been marked yet.
+      </p>
+
+      <a
+        routerLink="/attendance/add"
+        class="add-small-btn">
+
+        + Mark Attendance
+
+      </a>
+
+    </div>
+
+
+    <!-- Table -->
+    <div
+      class="table-wrapper"
+      *ngIf="attendanceRecords.length > 0">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>#</th>
+
+            <th>Student</th>
+
+            <th>Meal</th>
+
+            <th>Date</th>
+
+            <th>Status</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr
+            *ngFor="
+              let record of filteredRecords;
+              let i = index
+            ">
+
+            <td class="number">
+              {{ i + 1 }}
+            </td>
+
+
+            <td class="student-name">
+
+              {{ record.student?.name || 'N/A' }}
+
+            </td>
+
+
+            <td>
+
+              {{ record.meal?.name || 'N/A' }}
+
+            </td>
+
+
+            <td>
+
+              {{ record.attendanceDate || 'N/A' }}
+
+            </td>
+
+
+            <td>
+
+              <!-- PRESENT -->
+              <span
+                *ngIf="record.isPresent === true"
+                class="status present">
+
+                ● PRESENT
+
+              </span>
+
+
+              <!-- ABSENT -->
+              <span
+                *ngIf="record.isPresent === false"
+                class="status absent">
+
+                ● ABSENT
+
+              </span>
+
+
+              <!-- UNKNOWN -->
+              <span
+                *ngIf="
+                  record.isPresent !== true &&
+                  record.isPresent !== false
+                "
+                class="status unknown">
+
+                N/A
+
+              </span>
+
+            </td>
+
+          </tr>
+
+
+          <!-- Filter returned no records -->
+          <tr
+            *ngIf="
+              attendanceRecords.length > 0 &&
+              filteredRecords.length === 0
+            ">
+
+            <td
+              colspan="5"
+              class="no-filter-result">
+
+              No attendance records found for the selected dates.
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

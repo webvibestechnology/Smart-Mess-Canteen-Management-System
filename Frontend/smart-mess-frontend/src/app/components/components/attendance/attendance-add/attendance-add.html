@@ -1,1 +1,158 @@
-<p>attendance-add works!</p>
+<div class="container mt-4">
+
+  <h2>Mark Attendance</h2>
+
+  <form
+    [formGroup]="attendanceForm"
+    (ngSubmit)="markAttendance()">
+
+    <!-- Student -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Student
+      </label>
+
+      <select
+        class="form-select"
+        formControlName="student">
+
+        <option [ngValue]="null">
+          -- Select Student --
+        </option>
+
+        <option
+          *ngFor="let student of students"
+          [ngValue]="student.id">
+
+          {{ student.name }}
+
+          <span *ngIf="student.rollNumber">
+            - {{ student.rollNumber }}
+          </span>
+
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- Meal -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Meal
+      </label>
+
+      <select
+        class="form-select"
+        formControlName="meal">
+
+        <option [ngValue]="null">
+          -- Select Meal --
+        </option>
+
+        <option
+          *ngFor="let meal of meals"
+          [ngValue]="meal.id">
+
+          {{ meal.name }}
+
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- Date -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Attendance Date
+      </label>
+
+      <input
+        type="date"
+        class="form-control"
+        formControlName="attendanceDate">
+
+    </div>
+
+
+    <!-- Present / Absent -->
+
+    <div class="mb-3">
+
+      <label class="form-label d-block">
+        Attendance
+      </label>
+
+      <div class="form-check form-check-inline">
+
+        <input
+          class="form-check-input"
+          type="radio"
+          [value]="true"
+          formControlName="isPresent"
+          id="present">
+
+        <label
+          class="form-check-label"
+          for="present">
+
+          Present
+
+        </label>
+
+      </div>
+
+
+      <div class="form-check form-check-inline">
+
+        <input
+          class="form-check-input"
+          type="radio"
+          [value]="false"
+          formControlName="isPresent"
+          id="absent">
+
+        <label
+          class="form-check-label"
+          for="absent">
+
+          Absent
+
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <!-- Buttons -->
+
+    <button
+      type="submit"
+      class="btn btn-primary me-2">
+
+      Mark Attendance
+
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="cancel()">
+
+      Cancel
+
+    </button>
+
+  </form>
+
+</div>

@@ -1,1 +1,71 @@
-<p>mess-list works!</p>
+<div class="container mt-4">
+
+  <div class="d-flex justify-content-between mb-3">
+    <h2>Mess List</h2>
+
+    <a routerLink="/messes/add" class="btn btn-primary">
+      + Add Mess
+    </a>
+  </div>
+
+  <table class="table table-striped">
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Contact Number</th>
+        <th>Capacity</th>
+        <th>Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let m of messes">
+
+        <td>{{ m.id }}</td>
+
+        <td>{{ m.name }}</td>
+
+        <td>{{ m.location }}</td>
+
+        <td>{{ m.contactNumber }}</td>
+
+        <td>{{ m.capacity }}</td>
+
+        <td>{{ m.type }}</td>
+
+        <td>
+
+          <button
+            class="btn btn-sm btn-warning me-1"
+            (click)="editMess(m.id!)">
+            Edit
+          </button>
+
+          <button
+            class="btn btn-sm btn-danger"
+            (click)="deleteMess(m.id!)">
+            Delete
+          </button>
+
+        </td>
+
+      </tr>
+
+      <tr *ngIf="messes.length === 0">
+
+        <td colspan="7" class="text-center">
+          No messes found.
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>

@@ -1,1 +1,71 @@
-<p>canteen-add works!</p>
+<div class="container mt-4">
+
+  <h2>Add Canteen</h2>
+
+  <form [formGroup]="canteenForm" (ngSubmit)="addCanteen()">
+
+    <div class="mb-3">
+      <label>Name</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="name">
+    </div>
+
+    <div class="mb-3">
+      <label>Location</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="location">
+    </div>
+
+    <div class="mb-3">
+      <label>Opening Time</label>
+      <input
+        type="time"
+        class="form-control"
+        formControlName="openingTime">
+    </div>
+
+    <div class="mb-3">
+      <label>Closing Time</label>
+      <input
+        type="time"
+        class="form-control"
+        formControlName="closingTime">
+    </div>
+
+    <div class="mb-3">
+      <label>Contact Number</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="contactNumber">
+    </div>
+
+    <div class="mb-3">
+      <label>
+        <input
+          type="checkbox"
+          formControlName="isActive">
+        Active
+      </label>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary me-2">
+      Save Canteen
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="cancel()">
+      Cancel
+    </button>
+
+  </form>
+
+</div>

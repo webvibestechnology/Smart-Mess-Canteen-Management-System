@@ -1,1 +1,164 @@
-<p>feedback-add works!</p>
+<div class="container mt-4">
+
+  <h2>Add Feedback</h2>
+
+  <form
+    [formGroup]="feedbackForm"
+    (ngSubmit)="addFeedback()">
+
+    <!-- Student -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Student
+      </label>
+
+      <select
+        class="form-select"
+        formControlName="student">
+
+        <option [ngValue]="null">
+          -- Select Student --
+        </option>
+
+        <option
+          *ngFor="let student of students"
+          [ngValue]="student.id">
+
+          {{ student.name }}
+
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- Mess -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Mess
+      </label>
+
+      <select
+        class="form-select"
+        formControlName="mess">
+
+        <option [ngValue]="null">
+          -- Select Mess --
+        </option>
+
+        <option
+          *ngFor="let mess of messes"
+          [ngValue]="mess.id">
+
+          {{ mess.name }}
+
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- Rating -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Rating
+      </label>
+
+      <select
+        class="form-select"
+        formControlName="rating">
+
+        <option [ngValue]="null">
+          -- Select Rating --
+        </option>
+
+        <option
+          *ngFor="let rating of ratings"
+          [ngValue]="rating">
+
+          {{ rating }} ⭐
+
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- Comment -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Comment
+      </label>
+
+      <textarea
+        class="form-control"
+        rows="4"
+        formControlName="comment"
+        placeholder="Enter your comment">
+      </textarea>
+
+    </div>
+
+
+    <!-- Category -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Category
+      </label>
+
+      <select
+        class="form-select"
+        formControlName="category">
+
+        <option [ngValue]="null">
+          -- Select Category --
+        </option>
+
+        <option
+          *ngFor="let category of categories"
+          [ngValue]="category">
+
+          {{ category }}
+
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- Buttons -->
+
+    <button
+      type="submit"
+      class="btn btn-primary me-2">
+
+      Save Feedback
+
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="cancel()">
+
+      Cancel
+
+    </button>
+
+  </form>
+
+</div>

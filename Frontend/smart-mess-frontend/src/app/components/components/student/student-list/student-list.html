@@ -1,56 +1,33 @@
-<div class="container mt-4">
+<h1>STUDENT LIST TEST</h1>
 
-  <div class="d-flex justify-content-between mb-3">
-    <h2>Students</h2>
+<p>Total Students: {{ students.length }}</p>
 
-    <a routerLink="/students/add" class="btn btn-primary">
-      + Add Student
-    </a>
-  </div>
+<div *ngFor="let student of students">
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Roll No</th>
-        <th>Department</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
+  <p>
+    {{ student.id }} -
+    {{ student.name }} -
+    {{ student.email }}
+  </p>
 
-    <tbody>
-      <tr *ngFor="let s of students">
-        <td>{{ s.id }}</td>
-        <td>{{ s.name }}</td>
-        <td>{{ s.email }}</td>
-        <td>{{ s.rollNumber }}</td>
-        <td>{{ s.department }}</td>
-        <td>{{ s.status }}</td>
+  <button
+    type="button"
+    (click)="editStudent(student.id)">
+    Edit
+  </button>
 
-        <td>
-          <button
-            class="btn btn-sm btn-warning"
-            (click)="editStudent(s.id!)">
-            Edit
-          </button>
+  <button
+    type="button"
+    (click)="deleteStudent(student.id)">
+    Delete
+  </button>
 
-          <button
-            class="btn btn-sm btn-danger"
-            (click)="deleteStudent(s.id!)">
-            Delete
-          </button>
-        </td>
-      </tr>
-
-      <tr *ngIf="students.length === 0">
-        <td colspan="7" class="text-center">
-          No students found.
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <hr>
 
 </div>
+
+<button
+  type="button"
+  (click)="addStudent()">
+  + Add Student
+</button>

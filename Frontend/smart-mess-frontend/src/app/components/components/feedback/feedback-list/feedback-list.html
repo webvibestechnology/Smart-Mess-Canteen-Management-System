@@ -1,1 +1,88 @@
-<p>feedback-list works!</p>
+<div class="container mt-4">
+
+  <div class="d-flex justify-content-between mb-3">
+
+    <h2>Feedbacks</h2>
+
+    <a
+      routerLink="/feedbacks/add"
+      class="btn btn-primary">
+
+      + Add Feedback
+
+    </a>
+
+  </div>
+
+
+  <table class="table table-striped">
+
+    <thead>
+
+      <tr>
+
+        <th>Student</th>
+        <th>Mess</th>
+        <th>Rating</th>
+        <th>Comment</th>
+        <th>Category</th>
+
+      </tr>
+
+    </thead>
+
+
+    <tbody>
+
+      <tr
+        *ngFor="let feedback of feedbacks">
+
+        <td>
+          {{ feedback.student?.name || 'N/A' }}
+        </td>
+
+        <td>
+          {{ feedback.mess?.name || 'N/A' }}
+        </td>
+
+        <td>
+
+          <span>
+            {{ getStars(feedback.rating) }}
+          </span>
+
+          <small>
+            ({{ feedback.rating || 0 }}/5)
+          </small>
+
+        </td>
+
+        <td>
+          {{ feedback.comment || 'N/A' }}
+        </td>
+
+        <td>
+          {{ feedback.category || 'N/A' }}
+        </td>
+
+      </tr>
+
+
+      <tr
+        *ngIf="feedbacks.length === 0">
+
+        <td
+          colspan="5"
+          class="text-center">
+
+          No feedbacks found.
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>

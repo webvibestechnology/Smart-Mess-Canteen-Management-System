@@ -1,1 +1,152 @@
-<p>notice-list works!</p>
+<div class="container mt-4">
+
+  <!-- Header -->
+
+  <div class="d-flex justify-content-between mb-3">
+
+    <h2>Notices</h2>
+
+    <a
+      routerLink="/notices/add"
+      class="btn btn-primary">
+
+      + Add Notice
+
+    </a>
+
+  </div>
+
+
+  <!-- Notices Table -->
+
+  <table class="table table-striped">
+
+    <thead>
+
+      <tr>
+
+        <th>Title</th>
+
+        <th>Content</th>
+
+        <th>Type</th>
+
+        <th>Valid Until</th>
+
+        <th>Status</th>
+
+        <th>Action</th>
+
+      </tr>
+
+    </thead>
+
+
+    <tbody>
+
+      <tr
+        *ngFor="let notice of notices">
+
+        <!-- Title -->
+
+        <td>
+          {{ notice.title }}
+        </td>
+
+
+        <!-- Content -->
+
+        <td>
+          {{ notice.content || 'N/A' }}
+        </td>
+
+
+        <!-- Type -->
+
+        <td>
+
+          <span
+            class="type-badge"
+            [ngClass]="getTypeClass(notice.type)">
+
+            {{ notice.type }}
+
+          </span>
+
+        </td>
+
+
+        <!-- Valid Until -->
+
+        <td>
+          {{ notice.validUntil || 'N/A' }}
+        </td>
+
+
+        <!-- Status -->
+
+        <td>
+
+          <span
+            *ngIf="notice.isActive"
+            class="badge bg-success">
+
+            ACTIVE
+
+          </span>
+
+
+          <span
+            *ngIf="!notice.isActive"
+            class="badge bg-secondary">
+
+            INACTIVE
+
+          </span>
+
+        </td>
+
+
+        <!-- Action -->
+
+        <td>
+
+          <button
+            type="button"
+            class="btn btn-sm"
+            [ngClass]="
+              notice.isActive
+                ? 'btn-warning'
+                : 'btn-success'
+            "
+            (click)="toggleNotice(notice)">
+
+            {{ notice.isActive ? 'Deactivate' : 'Activate' }}
+
+          </button>
+
+        </td>
+
+      </tr>
+
+
+      <!-- No Notices -->
+
+      <tr
+        *ngIf="notices.length === 0">
+
+        <td
+          colspan="6"
+          class="text-center">
+
+          No notices found.
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>

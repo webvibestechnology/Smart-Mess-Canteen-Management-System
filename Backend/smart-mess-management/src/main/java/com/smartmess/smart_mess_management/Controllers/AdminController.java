@@ -1,71 +1,99 @@
 package com.smartmess.smart_mess_management.Controllers;
 
-
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.smartmess.smart_mess_management.Services.AdminService;
 import com.smartmess.smart_mess_management.entity.Admin;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/admins")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class AdminController {
 
     private final AdminService adminService;
 
-    @PostMapping
-    public ResponseEntity<Admin> create(
-            @Valid @RequestBody Admin admin) {
+
+    // =========================
+    // REGISTER ADMIN
+    // =========================
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody Admin admin) {
+
+        if (admin.getEmail() == null || admin.getEmail().isBlank()) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(Map.of("message", "Email is required"));
+        }
+
+        if (admin.getPassword() == null || admin.getPassword().isBlank()) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(Map.of("message", "Password is required"));
+        }
+
+        if (adminService.findByEmail(admin.getEmail()).isPresent()) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body(Map.of("message", "Email already registered"));
+        }
+
+        Admin savedAdmin = adminService.createAdmin(admin);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(adminService.createAdmin(admin));
+                .body(Map.of(
+                        "message", "Registration successful",
+                        "adminId", savedAdmin.getId()
+                ));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Admin> getById(
-            @PathVariable Long id) {
 
-        return ResponseEntity.ok(
-                adminService.getAdminById(id));
-    }
+    // =========================
+    // LOGIN ADMIN
+    // =========================
 
-    @GetMapping
-    public ResponseEntity<List<Admin>> getAll() {
+    @PostMapping("/login")
+    public ResponseEntity<?> login(
+            @RequestBody Map<String, String> credentials) {
 
-        return ResponseEntity.ok(
-                adminService.getAllAdmins());
-    }
+        String email = credentials.get("email");
+        String password = credentials.get("password");
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Admin> update(
-            @PathVariable Long id,
-            @Valid @RequestBody Admin admin) {
+        if (email == null || password == null) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(Map.of("message", "Email and password are required"));
+        }
 
-        return ResponseEntity.ok(
-                adminService.updateAdmin(id, admin));
-    }
+        return adminService.findByEmail(email)
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(
-            @PathVariable Long id) {
+                .filter(admin ->
+                        admin.getPassword().equals(password))
 
-        adminService.deleteAdmin(id);
+                .map(admin ->
+                        ResponseEntity.ok(
+                                Map.of(
+                                        "message", "Login successful",
+                                        "adminId", admin.getId()
+                                )
+                        )
+                )
 
-        return ResponseEntity.noContent().build();
+                .orElse(
+                        ResponseEntity
+                                .status(HttpStatus.UNAUTHORIZED)
+                                .body(Map.of(
+                                        "message",
+                                        "Invalid email or password"
+                                ))
+                );
     }
 }

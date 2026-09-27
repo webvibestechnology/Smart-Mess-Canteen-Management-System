@@ -1,1 +1,309 @@
-<p>dashboard works!</p>
+<div class="dashboard-layout">
+
+  <!-- =========================================
+       SIDEBAR
+  ========================================== -->
+
+  <aside class="sidebar">
+
+    <!-- LOGO -->
+    <div class="sidebar-logo">
+      🍴 Smart Mess
+    </div>
+
+
+    <!-- SIDEBAR MENU -->
+    <div class="sidebar-menu">
+
+      <!-- Dashboard -->
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+        🏠 Dashboard
+      </a>
+
+
+      <!-- Students -->
+      <a
+        routerLink="/students"
+        routerLinkActive="active">
+        👨‍🎓 Students
+      </a>
+
+
+      <!-- Messes -->
+      <a
+        routerLink="/messes"
+        routerLinkActive="active">
+        🏠 Messes
+      </a>
+
+
+      <!-- Canteens -->
+      <a
+        routerLink="/canteens"
+        routerLinkActive="active">
+        🍽️ Canteens
+      </a>
+
+
+      <!-- Menus / Meals -->
+      <a
+        routerLink="/menus"
+        routerLinkActive="active">
+        📋 Menus / Meals
+      </a>
+
+
+      <!-- Food Items -->
+      <a
+        routerLink="/food-items"
+        routerLinkActive="active">
+        🍛 Food Items
+      </a>
+
+
+      <!-- Orders -->
+      <a
+        routerLink="/orders"
+        routerLinkActive="active">
+        🛒 Orders
+      </a>
+
+
+      <!-- Payments -->
+      <a
+        routerLink="/payments"
+        routerLinkActive="active">
+        💳 Payments
+      </a>
+
+
+      <!-- Subscriptions -->
+      <a
+        routerLink="/subscriptions"
+        routerLinkActive="active">
+        📝 Subscriptions
+      </a>
+
+
+      <!-- Attendance -->
+      <a
+        routerLink="/attendance"
+        routerLinkActive="active">
+        📅 Attendance
+      </a>
+
+
+      <!-- Feedback -->
+      <a
+        routerLink="/feedbacks"
+        routerLinkActive="active">
+        ⭐ Feedback
+      </a>
+
+
+      <!-- Complaints -->
+      <a
+        routerLink="/complaints"
+        routerLinkActive="active">
+        ⚠️ Complaints
+      </a>
+
+
+      <!-- Notices -->
+      <a
+        routerLink="/notices"
+        routerLinkActive="active">
+        📢 Notices
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =========================================
+       MAIN DASHBOARD
+  ========================================== -->
+
+  <main class="dashboard-main">
+
+    <div class="dashboard-container">
+
+
+      <!-- =====================================
+           DASHBOARD HEADER
+      ====================================== -->
+
+      <div class="dashboard-title">
+
+        <h1>
+          Smart Mess Dashboard
+        </h1>
+
+        <p>
+          Smart Mess & Canteen Management System
+        </p>
+
+      </div>
+
+
+      <!-- =====================================
+           DASHBOARD CARDS
+      ====================================== -->
+
+      <div class="dashboard-cards">
+
+
+        <!-- TOTAL STUDENTS -->
+
+        <div class="dashboard-card">
+
+          <h3>
+            Total Students
+          </h3>
+
+          <div class="card-number">
+            {{ totalStudents }}
+          </div>
+
+          <p>
+            Registered Students
+          </p>
+
+        </div>
+
+
+        <!-- ACTIVE SUBSCRIPTIONS -->
+
+        <div class="dashboard-card">
+
+          <h3>
+            Active Subscriptions
+          </h3>
+
+          <div class="card-number">
+            {{ activeSubscriptions }}
+          </div>
+
+          <p>
+            Currently Active
+          </p>
+
+        </div>
+
+
+        <!-- PENDING ORDERS -->
+
+        <div class="dashboard-card">
+
+          <h3>
+            Pending Orders
+          </h3>
+
+          <div class="card-number">
+            {{ pendingOrders }}
+          </div>
+
+          <p>
+            Waiting for Confirmation
+          </p>
+
+        </div>
+
+
+        <!-- OPEN COMPLAINTS -->
+
+        <div class="dashboard-card">
+
+          <h3>
+            Open Complaints
+          </h3>
+
+          <div class="card-number">
+            {{ openComplaints }}
+          </div>
+
+          <p>
+            Unresolved Complaints
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- =====================================
+           RECENT NOTICES
+      ====================================== -->
+
+      <div class="recent-notices">
+
+        <h2>
+          Recent Notices
+        </h2>
+
+
+        <!-- NO NOTICES -->
+
+        <div
+          *ngIf="recentNotices.length === 0"
+          class="no-notices">
+
+          No recent notices found.
+
+        </div>
+
+
+        <!-- NOTICE LIST -->
+
+        <div
+          *ngFor="let notice of recentNotices"
+          class="notice-item">
+
+
+          <!-- NOTICE HEADER -->
+
+          <div class="notice-header">
+
+            <h3>
+              {{ notice.title }}
+            </h3>
+
+
+            <span class="notice-type">
+              {{ notice.type }}
+            </span>
+
+          </div>
+
+
+          <!-- NOTICE CONTENT -->
+
+          <p>
+            {{ notice.content || 'No content available.' }}
+          </p>
+
+
+          <!-- VALID UNTIL -->
+
+          <small>
+
+            Valid Until:
+
+            {{ notice.validUntil || 'N/A' }}
+
+          </small>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </main>
+
+</div>

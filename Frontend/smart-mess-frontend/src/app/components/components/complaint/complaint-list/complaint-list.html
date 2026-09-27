@@ -1,1 +1,121 @@
-<p>complaint-list works!</p>
+<div class="container mt-4">
+
+  <div class="d-flex justify-content-between mb-3">
+
+    <h2>Complaints</h2>
+
+    <a
+      routerLink="/complaints/add"
+      class="btn btn-primary">
+
+      + Add Complaint
+
+    </a>
+
+  </div>
+
+
+  <table class="table table-striped">
+
+    <thead>
+
+      <tr>
+
+        <th>Student</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Resolution</th>
+        <th>Action</th>
+
+      </tr>
+
+    </thead>
+
+
+    <tbody>
+
+      <tr
+        *ngFor="let complaint of complaints">
+
+        <td>
+          {{ complaint.student?.name || 'N/A' }}
+        </td>
+
+        <td>
+          {{ complaint.title }}
+        </td>
+
+        <td>
+          {{ complaint.description || 'N/A' }}
+        </td>
+
+        <td>
+          {{ complaint.category || 'N/A' }}
+        </td>
+
+        <td>
+
+          <span
+            class="status-badge"
+            [ngClass]="getStatusClass(complaint.status)">
+
+            {{ complaint.status }}
+
+          </span>
+
+        </td>
+
+        <td>
+          {{ complaint.resolution || '-' }}
+        </td>
+
+        <td>
+
+          <button
+            *ngIf="
+              complaint.status !== 'RESOLVED' &&
+              complaint.status !== 'CLOSED'
+            "
+            type="button"
+            class="btn btn-success btn-sm"
+            (click)="resolveComplaint(complaint.id!)">
+
+            Resolve
+
+          </button>
+
+          <span
+            *ngIf="
+              complaint.status === 'RESOLVED' ||
+              complaint.status === 'CLOSED'
+            ">
+
+            Completed
+
+          </span>
+
+        </td>
+
+      </tr>
+
+
+      <tr
+        *ngIf="complaints.length === 0">
+
+        <td
+          colspan="7"
+          class="text-center">
+
+          No complaints found.
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>

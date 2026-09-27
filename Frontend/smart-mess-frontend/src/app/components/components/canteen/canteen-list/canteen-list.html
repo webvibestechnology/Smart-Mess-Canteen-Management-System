@@ -1,1 +1,87 @@
-<p>canteen-list works!</p>
+<div style="padding: 30px;">
+
+  <h2>Canteen List</h2>
+
+  <button
+    type="button"
+    (click)="addCanteen()">
+    + Add Canteen
+  </button>
+
+  <hr>
+
+  <p *ngIf="loading">
+    Loading canteens...
+  </p>
+
+  <table
+    *ngIf="!loading"
+    border="1"
+    cellpadding="10"
+    cellspacing="0"
+    style="width: 100%;">
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Opening Time</th>
+        <th>Closing Time</th>
+        <th>Contact</th>
+        <th>Active</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let c of canteens">
+
+        <td>{{ c.id }}</td>
+
+        <td>{{ c.name }}</td>
+
+        <td>{{ c.location }}</td>
+
+        <td>{{ c.openingTime }}</td>
+
+        <td>{{ c.closingTime }}</td>
+
+        <td>{{ c.contactNumber }}</td>
+
+        <td>
+          {{ c.isActive ? 'ACTIVE' : 'INACTIVE' }}
+        </td>
+
+        <td>
+
+          <button
+            type="button"
+            (click)="editCanteen(c.id)">
+            Edit
+          </button>
+
+          <button
+            type="button"
+            (click)="deleteCanteen(c.id)">
+            Delete
+          </button>
+
+        </td>
+
+      </tr>
+
+      <tr *ngIf="canteens.length === 0">
+
+        <td colspan="8">
+          No canteens found.
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>

@@ -1,1 +1,122 @@
-<p>subscription-list works!</p>
+<div class="container mt-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+
+```
+<h2>Subscriptions</h2>
+
+<button
+  type="button"
+  class="btn btn-primary"
+  (click)="addSubscription()">
+
+  + Add Subscription
+
+</button>
+```
+
+  </div>
+
+  <table class="table table-striped">
+
+```
+<thead>
+
+  <tr>
+    <th>Student</th>
+    <th>Mess</th>
+    <th>Plan</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Status</th>
+  </tr>
+
+</thead>
+
+
+<tbody>
+
+  <tr
+    *ngFor="let subscription of subscriptions">
+
+    <td>
+      {{ subscription.student?.name || 'N/A' }}
+    </td>
+
+    <td>
+      {{ subscription.mess?.name || 'N/A' }}
+    </td>
+
+    <td>
+      {{ subscription.plan || 'N/A' }}
+    </td>
+
+    <td>
+      {{ subscription.startDate || 'N/A' }}
+    </td>
+
+    <td>
+      {{ subscription.endDate || 'N/A' }}
+    </td>
+
+    <td>
+
+      <span
+        *ngIf="subscription.status === 'ACTIVE'"
+        class="badge bg-success">
+
+        ACTIVE
+
+      </span>
+
+
+      <span
+        *ngIf="subscription.status === 'EXPIRED'"
+        class="badge bg-secondary">
+
+        EXPIRED
+
+      </span>
+
+
+      <span
+        *ngIf="subscription.status === 'CANCELLED'"
+        class="badge bg-danger">
+
+        CANCELLED
+
+      </span>
+
+
+      <span
+        *ngIf="subscription.status !== 'ACTIVE'
+          && subscription.status !== 'EXPIRED'
+          && subscription.status !== 'CANCELLED'">
+
+        N/A
+
+      </span>
+
+    </td>
+
+  </tr>
+
+
+  <tr *ngIf="subscriptions.length === 0">
+
+    <td
+      colspan="6"
+      class="text-center">
+
+      No subscriptions found.
+
+    </td>
+
+  </tr>
+
+</tbody>
+```
+
+  </table>
+
+</div>

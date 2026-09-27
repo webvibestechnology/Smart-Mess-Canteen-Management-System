@@ -1,42 +1,326 @@
 import { Routes } from '@angular/router';
-
-import { Dashboard } from './components/dashboard/dashboard';
+import { Home } from './components/components/home/home';
+import { Dashboard } from './components/components/dashboard/dashboard';
 
 import { StudentList } from './components/components/student/student-list/student-list';
 import { StudentAdd } from './components/components/student/student-add/student-add';
 import { StudentEdit } from './components/components/student/student-edit/student-edit';
 
+import { MessList } from './components/components/mess/mess-list/mess-list';
+import { MessAdd } from './components/components/mess/mess-add/mess-add';
+import { MessEdit } from './components/components/mess/mess-edit/mess-edit';
+
+import { CanteenList } from './components/components/canteen/canteen-list/canteen-list';
+import { CanteenAdd } from './components/components/canteen/canteen-add/canteen-add';
+import { CanteenEdit } from './components/components/canteen/canteen-edit/canteen-edit';
+
+import { MenuList } from './components/components/menu/menu-list/menu-list';
+import { MenuAdd } from './components/components/menu/menu-add/menu-add';
+import { MenuEdit } from './components/components/menu/menu-edit/menu-edit';
+
+import { FoodItemList } from './components/components/food-item/food-item-list/food-item-list';
+import { FoodItemAdd } from './components/components/food-item/food-item-add/food-item-add';
+import { FoodItemEdit } from './components/components/food-item/food-item-edit/food-item-edit';
+
+import { FoodOrderList } from './components/components/food-order/food-order-list/food-order-list';
+import { FoodOrderAdd } from './components/components/food-order/food-order-add/food-order-add';
+
+import { PaymentList } from './components/components/payment/payment-list/payment-list';
+
+import { SubscriptionList } from './components/components/subscription/subscription-list/subscription-list';
+import { SubscriptionAdd } from './components/components/subscription/subscription-add/subscription-add';
+
+import { AttendanceList } from './components/components/attendance/attendance-list/attendance-list';
+import { AttendanceAdd } from './components/components/attendance/attendance-add/attendance-add';
+
+import { FeedbackList } from './components/components/feedback/feedback-list/feedback-list';
+import { FeedbackAdd } from './components/components/feedback/feedback-add/feedback-add';
+
+import { ComplaintList } from './components/components/complaint/complaint-list/complaint-list';
+import { ComplaintAdd } from './components/components/complaint/complaint-add/complaint-add';
+
+import { NoticeList } from './components/components/notice/notice-list/notice-list';
+import { NoticeAdd } from './components/components/notice/notice-add/notice-add';
+
+import { authGuard } from './guards/guards/auth-guard';
+
+import { Login } from './components/components/login/login';
+import { Register } from './components/components/register/register';
+
+
 export const routes: Routes = [
 
-  // Default
+  // =====================================
+  // LOGIN
+  // =====================================
+
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
 
-  // Dashboard
+  {
+    path: 'home',
+    component: Home
+  },
+
+  {
+    path: 'login',
+    component: Login
+  },
+
+  {
+    path: 'register',
+    component: Register
+  },
+
+  // =====================================
+  // DEFAULT
+  // =====================================
+
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+
+
+  // =====================================
+  // DASHBOARD
+  // =====================================
+
   {
     path: 'dashboard',
-    component: Dashboard
+    component: Dashboard,
+    canActivate: [authGuard]
   },
 
-  // Student List
+
+  // =====================================
+  // STUDENTS
+  // =====================================
+
   {
     path: 'students',
-    component: StudentList
+    component: StudentList,
+    canActivate: [authGuard]
   },
 
-  // Add Student
   {
     path: 'students/add',
-    component: StudentAdd
+    component: StudentAdd,
+    canActivate: [authGuard]
   },
 
-  // Edit Student
   {
     path: 'students/edit/:id',
-    component: StudentEdit
-  }
+    component: StudentEdit,
+    canActivate: [authGuard]
+  },
 
+
+  // =====================================
+  // MESSES
+  // =====================================
+
+  {
+    path: 'messes',
+    component: MessList,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'messes/add',
+    component: MessAdd,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'messes/edit/:id',
+    component: MessEdit,
+    canActivate: [authGuard]
+  },
+
+
+  // =====================================
+  // CANTEENS
+  // =====================================
+
+  {
+    path: 'canteens',
+    component: CanteenList,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'canteens/add',
+    component: CanteenAdd,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'canteens/edit/:id',
+    component: CanteenEdit,
+    canActivate: [authGuard]
+  },
+
+
+  // =====================================
+  // MENUS
+  // =====================================
+
+  {
+    path: 'menus',
+    component: MenuList,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'menus/add',
+    component: MenuAdd,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'menus/edit/:id',
+    component: MenuEdit,
+    canActivate: [authGuard]
+  },
+
+
+  // =====================================
+  // FOOD ITEMS
+  // =====================================
+
+  {
+    path: 'food-items',
+    component: FoodItemList,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'food-items/add',
+    component: FoodItemAdd,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'food-items/edit/:id',
+    component: FoodItemEdit,
+    canActivate: [authGuard]
+  },
+
+
+  // =====================================
+  // ORDERS
+  // =====================================
+
+  {
+    path: 'orders',
+    component: FoodOrderList,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'orders/add',
+    component: FoodOrderAdd,
+    canActivate: [authGuard]
+  },
+
+
+  // =====================================
+  // PAYMENTS
+  // =====================================
+
+  {
+    path: 'payments',
+    component: PaymentList,
+    canActivate: [authGuard]
+  },
+
+
+  // =====================================
+  // SUBSCRIPTIONS
+  // =====================================
+
+  {
+    path: 'subscriptions',
+    component: SubscriptionList,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'subscriptions/add',
+    component: SubscriptionAdd,
+    canActivate: [authGuard]
+  },
+
+
+  // =====================================
+  // ATTENDANCE
+  // =====================================
+
+  {
+    path: 'attendance',
+    component: AttendanceList,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'attendance/add',
+    component: AttendanceAdd,
+    canActivate: [authGuard]
+  },
+
+
+  // =====================================
+  // FEEDBACK
+  // =====================================
+
+  {
+    path: 'feedbacks',
+    component: FeedbackList,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'feedbacks/add',
+    component: FeedbackAdd,
+    canActivate: [authGuard]
+  },
+
+
+  // =====================================
+  // COMPLAINTS
+  // =====================================
+
+  {
+    path: 'complaints',
+    component: ComplaintList,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'complaints/add',
+    component: ComplaintAdd,
+    canActivate: [authGuard]
+  },
+
+
+  // =====================================
+  // NOTICES
+  // =====================================
+
+  {
+    path: 'notices',
+    component: NoticeList,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'notices/add',
+    component: NoticeAdd,
+    canActivate: [authGuard]
+  },
+ 
 ];

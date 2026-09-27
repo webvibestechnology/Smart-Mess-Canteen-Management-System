@@ -1,1 +1,179 @@
-<p>food-order-add works!</p>
+<div class="container mt-4">
+
+  <h2>Place New Order</h2>
+
+  <form
+    [formGroup]="orderForm"
+    (ngSubmit)="addOrder()">
+
+    <!-- Student -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Student
+      </label>
+
+      <select
+        class="form-select"
+        formControlName="studentId">
+
+        <option [ngValue]="null">
+          -- Select Student --
+        </option>
+
+        <option
+          *ngFor="let student of students"
+          [ngValue]="student.id">
+
+          {{ student.name }}
+          <span *ngIf="student.rollNumber">
+            - {{ student.rollNumber }}
+          </span>
+
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- Canteen -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Canteen
+      </label>
+
+      <select
+        class="form-select"
+        formControlName="canteenId">
+
+        <option [ngValue]="null">
+          -- Select Canteen --
+        </option>
+
+        <option
+          *ngFor="let canteen of canteens"
+          [ngValue]="canteen.id">
+
+          {{ canteen.name }}
+
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- Food Item -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Food Item
+      </label>
+
+      <select
+        class="form-select"
+        formControlName="foodItemId"
+        (change)="onFoodItemChange()">
+
+        <option [ngValue]="null">
+          -- Select Food Item --
+        </option>
+
+        <option
+          *ngFor="let item of foodItems"
+          [ngValue]="item.id">
+
+          {{ item.name }} - ₹{{ item.price }}
+
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- Quantity -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Quantity
+      </label>
+
+      <input
+        type="number"
+        class="form-control"
+        formControlName="quantity"
+        min="1">
+
+    </div>
+
+
+    <!-- Total -->
+
+    <div
+      class="mb-3"
+      *ngIf="selectedFoodItem">
+
+      <label class="form-label">
+        Estimated Total
+      </label>
+
+      <input
+        type="text"
+        class="form-control"
+        [value]="
+          selectedFoodItem.price *
+          orderForm.get('quantity')?.value
+        "
+        readonly>
+
+    </div>
+
+
+    <!-- Status -->
+
+    <div class="mb-3">
+
+      <label class="form-label">
+        Status
+      </label>
+
+      <select
+        class="form-select"
+        formControlName="status">
+
+        <option value="PENDING">
+          PENDING
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <button
+      type="submit"
+      class="btn btn-primary me-2">
+
+      Place Order
+
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="cancel()">
+
+      Cancel
+
+    </button>
+
+  </form>
+
+</div>
